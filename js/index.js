@@ -1,13 +1,16 @@
 import {getStorage, setStorage, removeStorage} from './modules/storageControl.js'
-
-console.log(getStorage);
-console.log(setStorage);
-console.log(removeStorage);
+import {renderApp} from './modules/render.js'
+import {formControl} from './modules/control.js'
 
 {
 
 const init = (selectorApp) => {
 const app = document.querySelector(selectorApp);
+//const key = prompt('Введите ваше имя');
+const key = 'Анастасия-to-do';
+const data = getStorage(key);
+const {form, tbody} = renderApp(app, data);
+formControl(form, tbody, key);
 }
 
 window.todo = init;
