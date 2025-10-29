@@ -1,5 +1,6 @@
 import { renderNewTask } from './render.js'
-import { getStorage, setStorage, removeStorage } from './storageControl.js'
+import { getStorage, setStorage, removeStorage, editStorage } from './storageControl.js'
+import { installClass } from './createElements.js'
 
 export const formControl = (form, tbody, key) => {
     form.addEventListener('submit', e => {
@@ -30,9 +31,25 @@ export const formControl = (form, tbody, key) => {
 export const taskControl = (table, key) => {
     table.addEventListener('click', e => {
         if (e.target.closest('.btn-danger')) {
-            e.target.closest('.task').remove();
-            const task = e.target.closest('.task').children[1].textContent;
+            let task;
+            if (e.target.closest('.taskRow') !== null) {
+                task = e.target.closest('.taskRow').children[1].textContent;
+                e.target.closest('.taskRow').remove();
+            }
+            else { task = e.target.closest('.table-success').children[1].textContent; e.target.closest('.table-success').remove(); }
+
             removeStorage(key, task);
-        }
+        } else
+            if (e.target.closest('.btn-success')) {
+                e.target.closest('.btn-success').enabled = true;
+                const task = e.target.closest('.taskRow').children[1].textContent;
+                e.target.closest('.taskRow').children[2].textContent = 'Завершено';
+                installClass(e.target.closest('.taskRow').children[1], 'text-decoration-line-through');
+                installClass(e.target.closest('.taskRow'), 'table-success');
+                editStorage(key, task);
+            }
+
     });
+
+
 }

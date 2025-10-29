@@ -29,8 +29,17 @@ const removeStorage = (key, task) => {
     saveToStarage(key, data);
 };
 
+const editStorage = (key, task) => {    
+    const data = getStorage(key);
+    data.forEach((el, index) => {
+        if (el.task === task) { el.execution = 'Выполнена'; }
+    });
+    saveToStarage(key, data);
+};
+
 export {
     getStorage,
     setStorage,
-    removeStorage
+    removeStorage,
+    editStorage,
 };

@@ -73,7 +73,7 @@ const installClass = (el, classList) => {
 const createRow = (number, task, classList) => { 
     const row = document.createElement('tr');
     row.classList = classList;
-    row.classList.add('task');
+    row.classList.add('taskRow');
     let td = document.createElement('td');
     td.textContent = number;
     row.append(td);
@@ -96,6 +96,7 @@ export {
     createContainer,
     createTable,
     createRow,
+    installClass
 }
 
 
