@@ -63,7 +63,7 @@ const createTable = (classList) => {
     table.append(thead, tbody);
     table.tbody = tbody;
 
-    return { table, tbody, };
+    return table;
 }
 
 const installClass = (el, classList) => {

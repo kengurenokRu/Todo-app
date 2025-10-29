@@ -28,12 +28,12 @@ export const renderApp = (app, data) => {
     const caption = createCaption('Todo App');
     const form = createForm('d-flex align-items-center mb-3');
     const tableWrapper = createContainer('table-wrapper');
-    const { table, tbody } = createTable('table table-hover table-bordered');
+    const table = createTable('table table-hover table-bordered');
     tableWrapper.append(table);
-    renderTask(tbody, data);
+    renderTask(table.tbody, data);
     app.append(caption, form, tableWrapper);
     return {
         form,
-        tbody,        
+        tbody: table.tbody,        
     }
 }
