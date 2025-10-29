@@ -21,12 +21,12 @@ const setStorage = (key, obj) => {
     saveToStarage(key, data);
 };
 
-const removeStorage = (key, id) => {
+const removeStorage = (key, task) => {    
     const data = getStorage(key);
     data.forEach((el, index) => {
-        if (el.id === id) data.splice(index, 1)
+        if (el.task === task) data.splice(index, 1)
     });
-    setStorage(key, data);
+    saveToStarage(key, data);
 };
 
 export {

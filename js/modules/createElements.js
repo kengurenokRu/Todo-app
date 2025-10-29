@@ -29,9 +29,9 @@ const createForm = (classList) => {
     form.classList = classList;
     const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить');
     btnSubmit.disabled = true;
-    btnSubmit.name = 'submit';
+    btnSubmit.name = 'submitBtn';
     const btnReset = createButton('reset', 'btn btn-warning', 'Очистить');  
-    btnReset.name = 'reset';  
+    btnReset.name = 'resetBtn';  
     const input = createInput('text', 'ввести задачу', 'form-group me-3 mb-0');    
     form.append(
         input,
@@ -73,6 +73,7 @@ const installClass = (el, classList) => {
 const createRow = (number, task, classList) => { 
     const row = document.createElement('tr');
     row.classList = classList;
+    row.classList.add('task');
     let td = document.createElement('td');
     td.textContent = number;
     row.append(td);
