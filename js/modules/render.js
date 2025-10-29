@@ -34,6 +34,6 @@ export const renderApp = (app, data) => {
     app.append(caption, form, tableWrapper);
     return {
         form,
-        tbody,
+        tbody,        
     }
 }

@@ -27,10 +27,16 @@ const createInput = (type, placeholder, classList) => {
 const createForm = (classList) => {
     const form = document.createElement('form');
     form.classList = classList;
+    const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить');
+    btnSubmit.disabled = true;
+    btnSubmit.name = 'submit';
+    const btnReset = createButton('reset', 'btn btn-warning', 'Очистить');  
+    btnReset.name = 'reset';  
+    const input = createInput('text', 'ввести задачу', 'form-group me-3 mb-0');    
     form.append(
-        createInput('text', 'ввести задачу', 'form-group me-3 mb-0'),
-        createButton('submit', 'btn btn-primary me-3', 'Сохранить'),
-        createButton('reset', 'btn btn-warning', 'Очистить')
+        input,
+        btnSubmit,
+        btnReset
     );
     return form;
 };
@@ -78,7 +84,7 @@ const createRow = (number, task, classList) => {
     td.textContent = task.execution;
     row.append(td);
     td = document.createElement('td');
-    td.append(createButton('button', 'btn btn-danger', 'Удалить'), createButton('button', 'btn btn-success', 'Завершить'))
+    td.append(createButton('button', 'btn btn-danger me-1', 'Удалить'), createButton('button', 'btn btn-success', 'Завершить'))
     row.append(td);    
     return row;
 }
