@@ -51,12 +51,33 @@ export const taskControl = (table, key) => {
         } else
             if (e.target.closest('.btn-success')) {
                 e.target.closest('.btn-success').disabled = true;
+                e.target.closest('.btn-success').nextSibling.disabled = true;
+                if (e.target.closest('.btn-success').nextSibling.classList.contains('btn-info')){
+                    e.target.closest('.btn-success').nextSibling.textContent = "Редактировать";
+                        installClass(e.target.closest('.btn-success').nextSibling, 'btn btn-warning');
+                }
                 const id = e.target.closest('.taskRow').children[4].textContent;
-                e.target.closest('.taskRow').children[2].textContent = 'Выполнена';
+                e.target.closest('.taskRow').children[2].textContent = 'Выполнена';                
                 installClass(e.target.closest('.taskRow').children[1], 'text-decoration-line-through');
                 installClass(e.target.closest('.taskRow'), 'table-success');
                 editStorage(key, id);
             }
+            else
+                if (e.target.closest('.btn-warning')) {
+                    e.target.closest('.btn-warning').textContent = "Сохранить";
+                    installClass(e.target.closest('.btn-warning'), 'btn btn-info');
+                    const id = e.target.closest('.taskRow').children[4].textContent;
+                    e.target.closest('.taskRow').children[1].contentEditable = true;
+                }
+                else
+                    if (e.target.closest('.btn-info')) {
+                        e.target.closest('.btn-info').textContent = "Редактировать";
+                        installClass(e.target.closest('.btn-info'), 'btn btn-warning');
+                        const id = e.target.closest('.taskRow').children[4].textContent;
+                        e.target.closest('.taskRow').children[1].contentEditable = false;                        
+                        const textTask = e.target.closest('.taskRow').children[1].textContent;
+                        editStorage(key, id, textTask);
+                    }
     });
 
 

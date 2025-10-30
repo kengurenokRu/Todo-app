@@ -85,7 +85,7 @@ const createRow = (number, task, classListRow, classListText, disabled) => {
     td.textContent = task.execution;
     row.append(td);
     td = document.createElement('td');
-    td.append(createButton('button', 'btn btn-danger me-1', 'Удалить', false), createButton('button', 'btn btn-success', 'Завершить', disabled), createButton('button', 'btn btn-warning', 'Редактировать', disabled))
+    td.append(createButton('button', 'btn btn-danger me-1', 'Удалить', false), createButton('button', 'btn btn-success me-1', 'Завершить', disabled), createButton('button', 'btn btn-warning', 'Редактировать', disabled))
     row.append(td); 
     td = document.createElement('td');
     td.textContent = task.id;

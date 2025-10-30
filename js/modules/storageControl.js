@@ -21,7 +21,7 @@ const setStorage = (key, obj) => {
     saveToStarage(key, data);
 };
 
-const removeStorage = (key, id) => {    
+const removeStorage = (key, id) => {
     const data = getStorage(key);
     data.forEach((el, index) => {
         if (el.id === id) data.splice(index, 1)
@@ -29,10 +29,21 @@ const removeStorage = (key, id) => {
     saveToStarage(key, data);
 };
 
-const editStorage = (key, id) => {    
+const editStorage = (key, id, textContent='') => {
     const data = getStorage(key);
+    console.log(data);
     data.forEach((el, index) => {
-        if (el.id === id) { el.execution = 'Выполнена'; }
+        if (el.id === id) {
+            console.log(textContent);
+            if (textContent !== '') {
+                el.task = textContent;
+            }
+            else {
+                el.execution = 'Выполнена';
+            }
+            console.log(el.execution);
+            console.log(el.task);
+        }
     });
     saveToStarage(key, data);
 };
