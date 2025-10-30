@@ -36,14 +36,16 @@ export const taskControl = (table, key) => {
                 task = e.target.closest('.taskRow').children[1].textContent;
                 e.target.closest('.taskRow').remove();
             }
-            else { task = e.target.closest('.table-success').children[1].textContent; e.target.closest('.table-success').remove(); }
-
+            else { 
+                task = e.target.closest('.table-success').children[1].textContent; 
+                e.target.closest('.table-success').remove(); 
+            }
             removeStorage(key, task);
         } else
             if (e.target.closest('.btn-success')) {
-                e.target.closest('.btn-success').enabled = true;
+                e.target.closest('.btn-success').disabled = true;
                 const task = e.target.closest('.taskRow').children[1].textContent;
-                e.target.closest('.taskRow').children[2].textContent = 'Завершено';
+                e.target.closest('.taskRow').children[2].textContent = 'Выполнена';
                 installClass(e.target.closest('.taskRow').children[1], 'text-decoration-line-through');
                 installClass(e.target.closest('.taskRow'), 'table-success');
                 editStorage(key, task);

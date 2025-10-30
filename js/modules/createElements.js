@@ -4,11 +4,12 @@ const createContainer = (classList) => {
     return div;
 };
 
-const createButton = (type, classList, text) => {
+const createButton = (type, classList, text, disabled) => {
     const button = document.createElement('button');
     button.type = type;
     button.textContent = text;
     button.className = classList;
+    button.disabled = disabled;
     return button;
 };
 
@@ -27,10 +28,9 @@ const createInput = (type, placeholder, classList) => {
 const createForm = (classList) => {
     const form = document.createElement('form');
     form.classList = classList;
-    const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить');
-    btnSubmit.disabled = true;
+    const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить', true);   
     btnSubmit.name = 'submitBtn';
-    const btnReset = createButton('reset', 'btn btn-warning', 'Очистить');  
+    const btnReset = createButton('reset', 'btn btn-warning', 'Очистить', false);  
     btnReset.name = 'resetBtn';  
     const input = createInput('text', 'ввести задачу', 'form-group me-3 mb-0');    
     form.append(
@@ -70,22 +70,22 @@ const installClass = (el, classList) => {
     el.classList = classList;
 }
 
-const createRow = (number, task, classList) => { 
+const createRow = (number, task, classListRow, classListText, disabled) => { 
     const row = document.createElement('tr');
-    row.classList = classList;
+    row.classList = classListRow;
     row.classList.add('taskRow');
     let td = document.createElement('td');
     td.textContent = number;
     row.append(td);
     td = document.createElement('td');
     td.textContent = task.task;
-    td.classList.add('task');
+    td.classList = classListText;
     row.append(td);
     td = document.createElement('td');
     td.textContent = task.execution;
     row.append(td);
     td = document.createElement('td');
-    td.append(createButton('button', 'btn btn-danger me-1', 'Удалить'), createButton('button', 'btn btn-success', 'Завершить'))
+    td.append(createButton('button', 'btn btn-danger me-1', 'Удалить', false), createButton('button', 'btn btn-success', 'Завершить', disabled))
     row.append(td);    
     return row;
 }

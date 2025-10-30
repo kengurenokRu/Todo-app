@@ -13,9 +13,23 @@ const renderTask = (tbody, data) => {
             return [row];
         }
         else {
-            const allRow = data.map((el, index) => {                
-                const classList = el.execution === 'Выполнена' ? 'table-success' : 'table-light';
-                return createRow(index+1, el, classList);
+            const allRow = data.map((el, index) => {  
+                let classListRow; 
+                let classListText;
+                let disabled;
+
+                if (el.execution === 'Выполнена') { 
+                    classListRow = 'table-success';
+                    classListText = 'text-decoration-line-through';
+                    disabled = true;
+                }
+                else
+                {
+                    classListRow = 'table-light';
+                    classListText = 'task';
+                    disabled = false;
+                }                
+                return createRow(index+1, el, classListRow, classListText, disabled);
             });            
             tbody.append(...allRow);
             return allRow;
