@@ -4,6 +4,12 @@ const createContainer = (classList) => {
     return div;
 };
 
+const createCaption = (text) => {
+    const h3 = document.createElement('h3');
+    h3.textContent = text;
+    return h3;
+};
+
 const createButton = (type, classList, text, disabled) => {
     const button = document.createElement('button');
     button.type = type;
@@ -39,7 +45,13 @@ const createSelect = (classList, values) => {
 
 const createForm = (classList) => {
     const form = document.createElement('form');
-    form.classList = classList;
+    form.classList = classList;    
+    return form;
+};
+
+const createTaskForm = (classList) => {
+    const form = createForm(classList);
+    form.name = 'taskFrom';    
     const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить', true);
     btnSubmit.name = 'submitBtn';
     const btnReset = createButton('reset', 'btn btn-warning', 'Очистить', false);
@@ -57,11 +69,23 @@ const createForm = (classList) => {
     return form;
 };
 
-const createCaption = (text) => {
-    const h3 = document.createElement('h3');
-    h3.textContent = text;
-    return h3;
+const createModalForm = (classList) => {
+    const form = createForm(classList);
+    form.name = 'modalFrom';    
+    const caption = createCaption ('Привет, пользователь!');
+    const btnSubmit = createButton('submit', 'btn btn-primary', 'Ок', true);
+    btnSubmit.name = 'submitModalBtn';    
+    const {label, input} = createInput('text', 'Для продолжения работы представься', 'form-group mb-3');
+    input.name = 'modalName';
+    
+    form.append(
+        caption,
+        input,        
+        btnSubmit,        
+    );
+    return form;
 };
+
 
 const createTable = (classList) => {
     const table = document.createElement('table');
@@ -112,7 +136,8 @@ const createRow = (number, task, classListRow, classListText, disabled) => {
 
 export {
     createCaption,
-    createForm,
+    createTaskForm,
+    createModalForm,
     createContainer,
     createTable,
     createRow,

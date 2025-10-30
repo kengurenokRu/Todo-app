@@ -1,4 +1,4 @@
-import { createCaption, createForm, createContainer, createTable, createRow } from './createElements.js'
+import { createCaption, createTaskForm, createModalForm, createContainer, createTable, createRow } from './createElements.js'
 
 const defClassListRow = (data) => {
     if (data.importance === 'срочная') return 'table-danger';
@@ -50,12 +50,17 @@ const renderTask = (tbody, data) => {
 
 export const renderApp = (app, data) => {
     const caption = createCaption('Todo App');
-    const form = createForm('d-flex align-items-center mb-3');
+
+    const formModal = createModalForm('align-items-center');
+
+    
+
+    const form = createTaskForm('d-flex align-items-center mb-3');
     const tableWrapper = createContainer('table-wrapper');
     const table = createTable('table table-hover table-bordered');
     tableWrapper.append(table);
     renderTask(table.tbody, data);
-    app.append(caption, form, tableWrapper);
+    app.append(/*caption, form, tableWrapper*/ formModal);
     return {
         form,
         tbody: table.tbody,
