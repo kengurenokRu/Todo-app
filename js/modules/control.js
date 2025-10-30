@@ -9,6 +9,7 @@ export const formControl = (form, tbody, key) => {
         const newTask = Object.fromEntries(formData);
         newTask.execution = 'В процессе';
         newTask.id = Math.random().toString().substring(2, 10);
+        console.log(newTask);
         setStorage(key, newTask);
         renderNewTask(newTask, tbody);
         form.reset();

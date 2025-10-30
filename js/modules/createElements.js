@@ -18,23 +18,39 @@ const createInput = (type, placeholder, classList) => {
     label.classList = classList;
     const input = document.createElement('input');
     input.type = type;
-    input.name = 'task';
     input.placeholder = placeholder;
     input.classList.add('form-control');
+
     label.append(input);
-    return label;
+    return {label, input};
+};
+
+const createSelect = (classList, values) => {
+    const combobox = document.createElement('select');
+    combobox.classList = classList;
+    values.forEach(el => {
+        const option = document.createElement('option');
+        option.text = el;
+        option.value = el;
+        combobox.add(option);
+    });
+    return combobox;
 };
 
 const createForm = (classList) => {
     const form = document.createElement('form');
     form.classList = classList;
-    const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить', true);   
+    const btnSubmit = createButton('submit', 'btn btn-primary me-3', 'Сохранить', true);
     btnSubmit.name = 'submitBtn';
-    const btnReset = createButton('reset', 'btn btn-warning', 'Очистить', false);  
-    btnReset.name = 'resetBtn';  
-    const input = createInput('text', 'ввести задачу', 'form-group me-3 mb-0');    
+    const btnReset = createButton('reset', 'btn btn-warning', 'Очистить', false);
+    btnReset.name = 'resetBtn';
+    const {label, input} = createInput('text', 'ввести задачу', 'form-group me-3 mb-0');
+    input.name = 'task';
+    const comboBox = createSelect ('form-select', ['обычная','важная','срочная']);
+    comboBox.name = 'importance';
     form.append(
         input,
+        comboBox,
         btnSubmit,
         btnReset
     );
@@ -70,7 +86,7 @@ const installClass = (el, classList) => {
     el.classList = classList;
 }
 
-const createRow = (number, task, classListRow, classListText, disabled) => { 
+const createRow = (number, task, classListRow, classListText, disabled) => {
     const row = document.createElement('tr');
     row.classList = classListRow;
     row.classList.add('taskRow');
@@ -86,11 +102,11 @@ const createRow = (number, task, classListRow, classListText, disabled) => {
     row.append(td);
     td = document.createElement('td');
     td.append(createButton('button', 'btn btn-danger me-1', 'Удалить', false), createButton('button', 'btn btn-success me-1', 'Завершить', disabled), createButton('button', 'btn btn-warning', 'Редактировать', disabled))
-    row.append(td); 
+    row.append(td);
     td = document.createElement('td');
     td.textContent = task.id;
     td.style.display = 'none';
-    row.append(td);   
+    row.append(td);
     return row;
 }
 
