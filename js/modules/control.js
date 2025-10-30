@@ -8,7 +8,6 @@ export const formControl = (form, tbody, key) => {
         const formData = new FormData(e.target);
         const newTask = Object.fromEntries(formData);
         newTask.execution = 'В процессе';
-        console.log(newTask);
         setStorage(key, newTask);
         renderNewTask(newTask, tbody);
         form.reset();
@@ -36,10 +35,16 @@ export const taskControl = (table, key) => {
                 task = e.target.closest('.taskRow').children[1].textContent;
                 e.target.closest('.taskRow').remove();
             }
-            else { 
-                task = e.target.closest('.table-success').children[1].textContent; 
-                e.target.closest('.table-success').remove(); 
+            else {
+                task = e.target.closest('.table-success').children[1].textContent;
+                e.target.closest('.table-success').remove();
+
             }
+            console.log(table.tbody);
+            Array.from(table.tbody.children).forEach((el, index) => {                
+                el.children[0].textContent = index+1;
+            });
+
             removeStorage(key, task);
         } else
             if (e.target.closest('.btn-success')) {
@@ -50,7 +55,6 @@ export const taskControl = (table, key) => {
                 installClass(e.target.closest('.taskRow'), 'table-success');
                 editStorage(key, task);
             }
-
     });
 
 

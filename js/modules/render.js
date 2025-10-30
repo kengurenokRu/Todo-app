@@ -1,11 +1,12 @@
 import { createCaption, createForm, createContainer, createTable, createRow } from './createElements.js'
 
 export const renderNewTask = (task, tbody) => {
-    const row = createRow('1', task,'table-light');
+    const index = tbody.children.length;
+    const row = createRow(index + 1, task, 'table-light', false);
     tbody.append(row);
 };
 
-const renderTask = (tbody, data) => {    
+const renderTask = (tbody, data) => {
     if (data !== null) {
         if (!Array.isArray(data)) {
             const row = createRow('1', data, 'table-light');
@@ -13,24 +14,23 @@ const renderTask = (tbody, data) => {
             return [row];
         }
         else {
-            const allRow = data.map((el, index) => {  
-                let classListRow; 
+            const allRow = data.map((el, index) => {
+                let classListRow;
                 let classListText;
                 let disabled;
 
-                if (el.execution === 'Выполнена') { 
+                if (el.execution === 'Выполнена') {
                     classListRow = 'table-success';
                     classListText = 'text-decoration-line-through';
                     disabled = true;
                 }
-                else
-                {
+                else {
                     classListRow = 'table-light';
                     classListText = 'task';
                     disabled = false;
-                }                
-                return createRow(index+1, el, classListRow, classListText, disabled);
-            });            
+                }
+                return createRow(index + 1, el, classListRow, classListText, disabled);
+            });
             tbody.append(...allRow);
             return allRow;
         }
@@ -49,6 +49,6 @@ export const renderApp = (app, data) => {
     return {
         form,
         tbody: table.tbody,
-        table,        
+        table,
     }
 }
