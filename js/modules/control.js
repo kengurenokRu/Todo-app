@@ -8,6 +8,7 @@ export const formControl = (form, tbody, key) => {
         const formData = new FormData(e.target);
         const newTask = Object.fromEntries(formData);
         newTask.execution = 'В процессе';
+        newTask.id = Math.random().toString().substring(2, 10);
         setStorage(key, newTask);
         renderNewTask(newTask, tbody);
         form.reset();
@@ -30,30 +31,28 @@ export const formControl = (form, tbody, key) => {
 export const taskControl = (table, key) => {
     table.addEventListener('click', e => {
         if (e.target.closest('.btn-danger')) {
-            let task;
+            let id;
             if (e.target.closest('.taskRow') !== null) {
-                task = e.target.closest('.taskRow').children[1].textContent;
+                id = e.target.closest('.taskRow').children[4].textContent;
                 e.target.closest('.taskRow').remove();
             }
             else {
-                task = e.target.closest('.table-success').children[1].textContent;
+                id = e.target.closest('.table-success').children[4].textContent;
                 e.target.closest('.table-success').remove();
 
             }
-            console.log(table.tbody);
+            removeStorage(key, id);
             Array.from(table.tbody.children).forEach((el, index) => {                
                 el.children[0].textContent = index+1;
-            });
-
-            removeStorage(key, task);
+            });            
         } else
             if (e.target.closest('.btn-success')) {
                 e.target.closest('.btn-success').disabled = true;
-                const task = e.target.closest('.taskRow').children[1].textContent;
+                const id = e.target.closest('.taskRow').children[4].textContent;
                 e.target.closest('.taskRow').children[2].textContent = 'Выполнена';
                 installClass(e.target.closest('.taskRow').children[1], 'text-decoration-line-through');
                 installClass(e.target.closest('.taskRow'), 'table-success');
-                editStorage(key, task);
+                editStorage(key, id);
             }
     });
 

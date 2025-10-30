@@ -9,7 +9,7 @@ export const renderNewTask = (task, tbody) => {
 const renderTask = (tbody, data) => {
     if (data !== null) {
         if (!Array.isArray(data)) {
-            const row = createRow('1', data, 'table-light');
+            const row = createRow('1', data, 'table-light', false);
             tbody.append(row);
             return [row];
         }
