@@ -50,17 +50,12 @@ const renderTask = (tbody, data) => {
 
 export const renderApp = (app, data) => {
     const caption = createCaption('Todo App');
-
-    const formModal = createModalForm('align-items-center');
-
-    
-
     const form = createTaskForm('d-flex align-items-center mb-3');
     const tableWrapper = createContainer('table-wrapper');
     const table = createTable('table table-hover table-bordered');
     tableWrapper.append(table);
     renderTask(table.tbody, data);
-    app.append(/*caption, form, tableWrapper*/ formModal);
+    app.append(caption, form, tableWrapper);
     return {
         form,
         tbody: table.tbody,
