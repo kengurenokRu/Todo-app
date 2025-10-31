@@ -27,6 +27,13 @@ export const formControl = (form, tbody, key) => {
             form.elements.submitBtn.disabled = true;
         }
     });
+
+    form.addEventListener('keydown', e => {
+        if (e.keyCode === 13) {
+            form.preventDefault();
+            form.submit();
+        }
+    });
 };
 
 export const taskControl = (table, key) => {
@@ -53,12 +60,12 @@ export const taskControl = (table, key) => {
             if (e.target.closest('.btn-success')) {
                 e.target.closest('.btn-success').disabled = true;
                 e.target.closest('.btn-success').nextSibling.disabled = true;
-                if (e.target.closest('.btn-success').nextSibling.classList.contains('btn-info')){
+                if (e.target.closest('.btn-success').nextSibling.classList.contains('btn-info')) {
                     e.target.closest('.btn-success').nextSibling.textContent = "Редактировать";
-                        installClass(e.target.closest('.btn-success').nextSibling, 'btn btn-warning');
+                    installClass(e.target.closest('.btn-success').nextSibling, 'btn btn-warning');
                 }
                 const id = e.target.closest('.taskRow').children[4].textContent;
-                e.target.closest('.taskRow').children[2].textContent = 'Выполнена';                
+                e.target.closest('.taskRow').children[2].textContent = 'Выполнена';
                 installClass(e.target.closest('.taskRow').children[1], 'text-decoration-line-through');
                 installClass(e.target.closest('.taskRow'), 'table-success');
                 editStorage(key, id);
@@ -75,7 +82,7 @@ export const taskControl = (table, key) => {
                         e.target.closest('.btn-info').textContent = "Редактировать";
                         installClass(e.target.closest('.btn-info'), 'btn btn-warning');
                         const id = e.target.closest('.taskRow').children[4].textContent;
-                        e.target.closest('.taskRow').children[1].contentEditable = false;                        
+                        e.target.closest('.taskRow').children[1].contentEditable = false;
                         const textTask = e.target.closest('.taskRow').children[1].textContent;
                         editStorage(key, id, textTask);
                     }
